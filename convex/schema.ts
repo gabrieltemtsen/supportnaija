@@ -49,7 +49,26 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index("by_reference", ["paystackReference"])
-    .index("by_pool", ["poolId"]),
+    .index("by_pool", ["poolId"])
+    .index("by_status", ["status"])
+    .index("by_donor", ["donorId"])
+    .index("by_status_createdAt", ["status", "createdAt"]),
+
+  feedbackMessages: defineTable({
+    recipientId: v.optional(v.id("recipients")),
+    recipientAliasId: v.optional(v.string()),
+    donorId: v.optional(v.id("donors")),
+    donationId: v.optional(v.id("donations")),
+    payoutId: v.optional(v.id("payouts")),
+    message: v.string(),
+    isPublic: v.boolean(),
+    status: v.union(v.literal("pending"), v.literal("approved"), v.literal("rejected")),
+    createdAt: v.number(),
+  })
+    .index("by_status", ["status"])
+    .index("by_createdAt", ["createdAt"])
+    .index("by_recipient", ["recipientId"])
+    .index("by_donor", ["donorId"]),
 
   recipients: defineTable({
     clerkUserId: v.string(),
