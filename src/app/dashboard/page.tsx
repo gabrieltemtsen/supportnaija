@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LeaderboardClient } from "./LeaderboardClient";
+import { FeedbackClient } from "./FeedbackClient";
 
 export default function DashboardPage() {
   return (
@@ -25,26 +26,18 @@ export default function DashboardPage() {
         <LeaderboardClient />
       </div>
 
-      <div className="mt-10 grid gap-6 lg:grid-cols-2">
-        <section className="rounded-2xl border border-black/10 bg-white p-5">
-          <h2 className="text-sm font-semibold">Hall of fame</h2>
-          <p className="mt-1 text-sm text-black/70">
-            Curated recognition for top and consistent donors.
-          </p>
-          <div className="mt-4 rounded-xl border border-dashed border-black/15 p-4 text-sm text-black/60">
-            Next: featured donors + privacy controls.
-          </div>
-        </section>
+      <div className="mt-10">
+        <FeedbackClient />
+      </div>
 
-        <section className="rounded-2xl border border-black/10 bg-white p-5">
-          <h2 className="text-sm font-semibold">Recipient feedback / goodwill messages</h2>
-          <p className="mt-1 text-sm text-black/70">
-            Public messages (moderated). We’ll mark messages tied to successful payouts as “verified payout”.
-          </p>
-          <div className="mt-4 rounded-xl border border-dashed border-black/15 p-4 text-sm text-black/60">
-            Next: submit form + public feed.
-          </div>
-        </section>
+      <div className="mt-10 rounded-2xl border border-black/10 bg-white p-5">
+        <h2 className="text-sm font-semibold">Hall of fame</h2>
+        <p className="mt-1 text-sm text-black/70">
+          Curated recognition for top and consistent donors.
+        </p>
+        <div className="mt-4 rounded-xl border border-dashed border-black/15 p-4 text-sm text-black/60">
+          Next: featured donors + privacy controls.
+        </div>
       </div>
     </main>
   );
