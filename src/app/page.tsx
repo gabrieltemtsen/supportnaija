@@ -44,6 +44,12 @@ export default function HomePage() {
             Donate
           </Link>
           <Link
+            href="/dashboard"
+            className="rounded-xl border border-black/10 bg-white px-4 py-2 text-sm font-medium hover:bg-black/5"
+          >
+            Leaderboard
+          </Link>
+          <Link
             href="/apply"
             className="rounded-xl border border-black/10 bg-white px-4 py-2 text-sm font-medium hover:bg-black/5"
           >
