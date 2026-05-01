@@ -1,90 +1,119 @@
-import { ArrowRight, ShieldCheck, Wallet, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  HeartHandshake,
+  ShieldCheck,
+  Users,
+  Wallet,
+  Zap,
+} from "lucide-react";
 import Link from "next/link";
 
-const NIGERIA_GREEN = "#008753";
+import { Container } from "@/components/Container";
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-black/5 bg-white/70 px-4 py-3 backdrop-blur">
-      <div className="text-xl font-semibold tracking-tight">{value}</div>
-      <div className="text-xs text-black/60">{label}</div>
+    <div className="rounded-2xl border border-black/5 bg-white px-4 py-3 shadow-[0_1px_0_rgba(0,0,0,0.02)]">
+      <div className="tabular text-xl font-semibold tracking-tight">{value}</div>
+      <div className="text-xs text-black/55">{label}</div>
+    </div>
+  );
+}
+
+function Feature({
+  icon: Icon,
+  title,
+  body,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  body: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-black/5 bg-white p-5">
+      <div
+        className="flex h-9 w-9 items-center justify-center rounded-xl"
+        style={{
+          backgroundColor: "var(--brand-green-50)",
+          color: "var(--brand-green)",
+        }}
+      >
+        <Icon className="h-5 w-5" />
+      </div>
+      <div className="mt-3 text-sm font-semibold">{title}</div>
+      <p className="mt-1 text-sm leading-relaxed text-black/65">{body}</p>
+    </div>
+  );
+}
+
+function Step({
+  n,
+  title,
+  body,
+}: {
+  n: number;
+  title: string;
+  body: string;
+}) {
+  return (
+    <div className="relative rounded-2xl border border-black/5 bg-white p-5">
+      <div
+        className="absolute -top-3 left-5 inline-flex h-6 min-w-6 items-center justify-center rounded-full px-2 text-xs font-semibold text-white"
+        style={{ backgroundColor: "var(--brand-green)" }}
+      >
+        {n}
+      </div>
+      <div className="mt-2 text-sm font-semibold">{title}</div>
+      <p className="mt-1 text-sm leading-relaxed text-black/65">{body}</p>
     </div>
   );
 }
 
 export default function HomePage() {
   return (
-    <main className="min-h-[calc(100vh-0px)] bg-white text-black">
+    <main className="relative">
       {/* Background */}
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div
           className="absolute inset-0 opacity-[0.18]"
           style={{
             background:
-              "radial-gradient(circle at 20% 15%, rgba(0,135,83,0.35), transparent 40%), radial-gradient(circle at 80% 30%, rgba(0,135,83,0.25), transparent 35%), radial-gradient(circle at 50% 90%, rgba(0,135,83,0.18), transparent 45%)",
+              "radial-gradient(circle at 20% 15%, rgba(0,135,83,0.35), transparent 40%), radial-gradient(circle at 80% 30%, rgba(0,135,83,0.25), transparent 35%), radial-gradient(circle at 50% 90%, rgba(0,135,83,0.15), transparent 45%)",
           }}
         />
-        <div className="absolute inset-x-0 top-[-120px] mx-auto h-[260px] w-[1100px] max-w-[94vw] rounded-full bg-[linear-gradient(90deg,rgba(0,135,83,0.22),rgba(255,255,255,0.0),rgba(0,135,83,0.22))] blur-3xl" />
+        <div className="absolute inset-x-0 top-[-120px] mx-auto h-[260px] w-[1100px] max-w-[94vw] rounded-full bg-[linear-gradient(90deg,rgba(0,135,83,0.22),rgba(255,255,255,0),rgba(0,135,83,0.22))] blur-3xl" />
       </div>
 
-      {/* Header */}
-      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-5">
-        <div className="flex items-center gap-2">
-          <div
-            className="h-8 w-8 rounded-xl"
-            style={{ backgroundColor: NIGERIA_GREEN }}
-          />
-          <div className="font-semibold tracking-tight">SupportNaija</div>
-        </div>
-        <nav className="flex items-center gap-2">
-          <Link
-            href="/donate"
-            className="rounded-xl bg-black px-4 py-2 text-sm font-medium text-white hover:bg-black/90"
-          >
-            Donate
-          </Link>
-          <Link
-            href="/dashboard"
-            className="rounded-xl border border-black/10 bg-white px-4 py-2 text-sm font-medium hover:bg-black/5"
-          >
-            Leaderboard
-          </Link>
-          <Link
-            href="/apply"
-            className="rounded-xl border border-black/10 bg-white px-4 py-2 text-sm font-medium hover:bg-black/5"
-          >
-            Apply for support
-          </Link>
-        </nav>
-      </header>
-
       {/* Hero */}
-      <section className="mx-auto w-full max-w-6xl px-4 pb-10 pt-8">
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+      <Container className="pb-12 pt-10 sm:pt-14">
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-xs text-black/70">
               <span
+                aria-hidden
                 className="inline-block h-2 w-2 rounded-full"
-                style={{ backgroundColor: NIGERIA_GREEN }}
+                style={{ backgroundColor: "var(--brand-green)" }}
               />
-              Transparent support for Nigerians — mobile-first.
+              Transparent support for Nigerians — mobile-first
             </div>
+
             <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
               Support Naija.
-              <span className="block text-black/70">
-                Verified help, public balances, optional anonymous giving.
+              <span className="block text-black/65">
+                Verified help. Public balances. Optional anonymous giving.
               </span>
             </h1>
+
             <p className="mt-4 max-w-xl text-base leading-relaxed text-black/70">
-              Donate from ₦500. Beneficiaries are BVN-verified (with optional NIN for
-              extra protection). Pool balances are visible, disbursements are tracked,
-              and we keep things simple.
+              Donate from ₦500. Beneficiaries are BVN-verified (with optional
+              NIN for extra protection). Pool balances are visible,
+              disbursements are tracked, and we keep things simple.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 href="/donate"
-                className="inline-flex items-center gap-2 rounded-xl bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-black/90"
+                className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-95"
+                style={{ backgroundColor: "var(--brand-green)" }}
               >
                 Donate now <ArrowRight className="h-4 w-4" />
               </Link>
@@ -93,6 +122,12 @@ export default function HomePage() {
                 className="inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white px-5 py-3 text-sm font-semibold hover:bg-black/5"
               >
                 View transparency
+              </Link>
+              <Link
+                href="/apply"
+                className="inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white px-5 py-3 text-sm font-semibold hover:bg-black/5"
+              >
+                Apply for support
               </Link>
             </div>
 
@@ -103,59 +138,165 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-black/10 bg-white/70 p-6 backdrop-blur">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-black/5 bg-white p-4">
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <Wallet className="h-4 w-4" style={{ color: NIGERIA_GREEN }} />
-                  Donations
-                </div>
-                <p className="mt-2 text-sm text-black/70">
-                  One-time or recurring. Donate publicly or get an Anonymous ID.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-black/5 bg-white p-4">
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <ShieldCheck className="h-4 w-4" style={{ color: NIGERIA_GREEN }} />
-                  Verification
-                </div>
-                <p className="mt-2 text-sm text-black/70">
-                  BVN-first verification to reduce fraud. Optional NIN for extra trust.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-black/5 bg-white p-4">
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <Zap className="h-4 w-4" style={{ color: NIGERIA_GREEN }} />
-                  Fast support
-                </div>
-                <p className="mt-2 text-sm text-black/70">
-                  Auto-approve ₦1,000 airtime for BVN-verified recipients when funded.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-black/5 bg-white p-4">
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <ShieldCheck className="h-4 w-4" style={{ color: NIGERIA_GREEN }} />
-                  NGO pools
-                </div>
-                <p className="mt-2 text-sm text-black/70">
-                  NGOs can create pools and choose NGO-controlled or platform-controlled approvals.
-                </p>
-              </div>
+          <div className="rounded-3xl border border-black/10 bg-white/80 p-6 backdrop-blur">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Feature
+                icon={Wallet}
+                title="Donations"
+                body="One-time or recurring. Donate publicly or get an Anonymous ID."
+              />
+              <Feature
+                icon={ShieldCheck}
+                title="Verification"
+                body="BVN-first verification reduces fraud. Optional NIN for extra trust."
+              />
+              <Feature
+                icon={Zap}
+                title="Fast support"
+                body="Auto-approve ₦1,000 airtime for BVN-verified recipients when funded."
+              />
+              <Feature
+                icon={HeartHandshake}
+                title="NGO pools"
+                body="NGOs create pools and choose NGO- or platform-controlled approvals."
+              />
             </div>
 
-            <div className="mt-6 rounded-2xl bg-[linear-gradient(90deg,rgba(0,135,83,0.12),rgba(0,135,83,0.02))] p-4">
+            <div
+              className="mt-5 rounded-2xl p-4"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(0,135,83,0.12), rgba(0,135,83,0.02))",
+              }}
+            >
               <div className="text-sm font-semibold">SEO-ready from day one</div>
               <p className="mt-1 text-sm text-black/70">
-                Proper metadata, OpenGraph, fast mobile performance, and clean, indexable pool pages.
+                Proper metadata, OpenGraph, fast mobile performance, and clean,
+                indexable pool pages.
               </p>
             </div>
           </div>
         </div>
-      </section>
+      </Container>
 
-      <footer className="mx-auto w-full max-w-6xl px-4 pb-10 text-xs text-black/60">
-        © {new Date().getFullYear()} SupportNaija. Built for transparency.
-      </footer>
+      {/* How it works */}
+      <Container className="py-12">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wide text-black/55">
+              How it works
+            </div>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+              Three steps. No paperwork drama.
+            </h2>
+          </div>
+          <Link
+            href="/apply"
+            className="hidden text-sm font-semibold text-black hover:underline sm:inline-flex"
+          >
+            Apply for support →
+          </Link>
+        </div>
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <Step
+            n={1}
+            title="Donor gives ₦500+"
+            body="Choose a pool, optionally stay anonymous, and check out securely."
+          />
+          <Step
+            n={2}
+            title="Beneficiary verified"
+            body="BVN-first verification. NIN optional for extra trust and higher caps."
+          />
+          <Step
+            n={3}
+            title="Disbursed transparently"
+            body="Funds disbursed as airtime or cash. Every move is logged on a public ledger."
+          />
+        </div>
+      </Container>
+
+      {/* Trust band */}
+      <Container className="py-12">
+        <div
+          className="rounded-3xl border border-black/5 p-6 sm:p-10"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(0,135,83,0.10), rgba(0,135,83,0.02))",
+          }}
+        >
+          <div className="grid gap-6 sm:grid-cols-3">
+            <div className="flex items-start gap-3">
+              <ShieldCheck
+                className="mt-1 h-5 w-5"
+                style={{ color: "var(--brand-green)" }}
+              />
+              <div>
+                <div className="text-sm font-semibold">Verified beneficiaries</div>
+                <p className="mt-1 text-sm text-black/65">
+                  BVN- and NIN-backed checks reduce duplicate and fraudulent
+                  applications.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Wallet
+                className="mt-1 h-5 w-5"
+                style={{ color: "var(--brand-green)" }}
+              />
+              <div>
+                <div className="text-sm font-semibold">Public balances</div>
+                <p className="mt-1 text-sm text-black/65">
+                  Pool balances and totals are visible. No black boxes.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Users
+                className="mt-1 h-5 w-5"
+                style={{ color: "var(--brand-green)" }}
+              />
+              <div>
+                <div className="text-sm font-semibold">Built for Nigeria</div>
+                <p className="mt-1 text-sm text-black/65">
+                  Naira-native, mobile-first, and tuned for low-bandwidth
+                  networks.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+
+      {/* Final CTA */}
+      <Container className="pb-16">
+        <div className="flex flex-col items-start justify-between gap-4 rounded-3xl border border-black/10 bg-white p-6 sm:flex-row sm:items-center sm:p-8">
+          <div>
+            <div className="text-xl font-semibold tracking-tight">
+              Ready to make a difference?
+            </div>
+            <p className="mt-1 text-sm text-black/65">
+              Donate from ₦500, or apply for verified support today.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/donate"
+              className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white"
+              style={{ backgroundColor: "var(--brand-green)" }}
+            >
+              Donate <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white px-5 py-3 text-sm font-semibold hover:bg-black/5"
+            >
+              View leaderboard
+            </Link>
+          </div>
+        </div>
+      </Container>
     </main>
   );
 }

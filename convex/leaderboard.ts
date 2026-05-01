@@ -1,5 +1,6 @@
 import { query } from "./_generated/server";
 import { v } from "convex/values";
+import type { QueryCtx } from "./_generated/server";
 import type { Id } from "./_generated/dataModel";
 
 type LeaderboardRow = {
@@ -16,7 +17,7 @@ function startOfMonthMs(now: Date): number {
 }
 
 async function buildLeaderboard(
-  ctx: any,
+  ctx: QueryCtx,
   opts: { sinceMs?: number; limit: number }
 ): Promise<LeaderboardRow[]> {
   const sinceMs = opts.sinceMs;
@@ -25,7 +26,7 @@ async function buildLeaderboard(
   // If this grows large, we’ll introduce a materialized aggregate table.
   const donations = await ctx.db
     .query("donations")
-    .withIndex("by_status", (q: any) => q.eq("status", "succeeded"))
+    .withIndex("by_status", (q) => q.eq("status", "succeeded"))
     .collect();
 
   const totals = new Map<Id<"donors">, { total: number; count: number }>();

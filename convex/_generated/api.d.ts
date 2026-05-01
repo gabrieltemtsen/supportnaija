@@ -8,6 +8,8 @@
  * @module
  */
 
+import type * as donations from "../donations.js";
+import type * as donors from "../donors.js";
 import type * as feedback from "../feedback.js";
 import type * as leaderboard from "../leaderboard.js";
 import type * as pools from "../pools.js";
@@ -19,6 +21,8 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  donations: typeof donations;
+  donors: typeof donors;
   feedback: typeof feedback;
   leaderboard: typeof leaderboard;
   pools: typeof pools;

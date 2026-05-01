@@ -4,6 +4,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { siteMetadata } from "@/lib/seo";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Providers } from "./providers";
 
 const geistSans = Geist({
@@ -29,8 +31,12 @@ export default function RootLayout({
         lang="en-NG"
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
-        <body className="min-h-full flex flex-col">
-          <Providers>{children}</Providers>
+        <body className="min-h-full flex flex-col bg-white text-[color:var(--foreground)]">
+          <Providers>
+            <SiteHeader />
+            <div className="flex-1">{children}</div>
+            <SiteFooter />
+          </Providers>
         </body>
       </html>
     </ClerkProvider>
